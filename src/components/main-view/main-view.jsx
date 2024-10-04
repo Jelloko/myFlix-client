@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
@@ -12,10 +12,11 @@ export const MainView = () => {
       .then((data) => {
         const moviesFromApi = data.map((movie) => {
           return {
-            id: movie.key,
+            id: movie._id,
             Title: movie.Title,
+            Description: movie.Description,
             ImagePath: movie.ImagePath,
-            Director: movie.Director_name?.[0]
+            Director: movie.Director_Name?.[0],
           };
         });
 
@@ -25,19 +26,22 @@ export const MainView = () => {
 
   if (selectedMovie) {
     return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => setSelectedMovie(null)}
+      />
     );
   }
 
   if (movies.length === 0) {
-    return <div>It's empty!</div>;
+    return <div>The list is empty!</div>;
   }
 
   return (
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
+          key={movie._id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
             setSelectedMovie(newSelectedMovie);
@@ -46,4 +50,4 @@ export const MainView = () => {
       ))}
     </div>
   );
-}
+};
