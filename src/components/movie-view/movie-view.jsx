@@ -5,7 +5,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <img src={movie.ImagePath} />
         </div>
       <div>
-        <span>id: </span>
+        <span>_id: </span>
         <span>{movie._id}</span>
       </div>
       <div>
