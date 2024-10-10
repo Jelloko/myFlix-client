@@ -12,9 +12,8 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   useEffect(() => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
+    
     fetch("https://my-flix-cf-fd6a3633859c.herokuapp.com/movies",{
       headers: { Authorization: `Bearer ${token}` }
     })
