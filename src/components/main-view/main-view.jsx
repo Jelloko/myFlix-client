@@ -23,17 +23,10 @@ export const MainView = () => {
         console.log(data);
       });
     }, [token]);
-        const moviesFromApi = data.map((movie) => {
-          return {
-            _id: movie._id,
-            Title: movie.Title,
-            Description: movie.Description,
-            ImagePath: movie.ImagePath,
-            Director: movie.Director_Name?.[0],
-          };
-        });
+     
+  
 
-        setMovies(moviesFromApi);
+       // setMovies(moviesFromApi);
 
         if (!user) {
           return (
@@ -61,8 +54,6 @@ export const MainView = () => {
     return <div>The list is empty!</div>;
   }
 
-  <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-
   return (
     <div>
       {movies.map((movie) => (
@@ -77,3 +68,5 @@ export const MainView = () => {
     </div>
   );
 };
+
+<button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
