@@ -17,16 +17,22 @@ export const MainView = () => {
     fetch("https://my-flix-cf-fd6a3633859c.herokuapp.com/movies",{
       headers: { Authorization: `Bearer ${token}` }
     })
-    
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-      });
+        const moviesFromApi = data.map((movie) => {
+          return {
+            _id: movie._id,
+            Title: movie.Title,
+            Description: movie.Description,
+            ImagePath: movie.ImagePath,
+            Director: movie.Director_Name?.[0],
+          };
+        });
+        setMovies(moviesFromApi);
+      })
+      .catch((error) => console.error('Error fetching movies:', error));
     }, [token]);
      
-  
-
-       // setMovies(moviesFromApi);
 
         if (!user) {
           return (
@@ -65,8 +71,7 @@ export const MainView = () => {
           }}
         />
       ))}
+      <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
     </div>
   );
 };
-
-<button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
