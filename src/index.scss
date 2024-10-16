@@ -3,3 +3,13 @@ $color: steelblue;
 .my-flix {
   color: $color;
 }
+
+button {
+  color: black;
+  background-color: Orange;
+}
+
+$primary: Darkorange;
+$body-bg: Powderblue;
+
+@import '~bootstrap/scss/bootstrap.scss';
