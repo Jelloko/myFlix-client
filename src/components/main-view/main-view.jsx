@@ -12,12 +12,13 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   useEffect(() => {
-    fetch("https://my-flix-cf-fd6a3633859c.herokuapp.com/movies")
+    if (!token) return;
+    
+    fetch("https://my-flix-cf-fd6a3633859c.herokuapp.com/movies",{
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-      });
-    }, [token]);
         const moviesFromApi = data.map((movie) => {
           return {
             _id: movie._id,
@@ -28,8 +29,23 @@ export const MainView = () => {
           };
         });
         setMovies(moviesFromApi);
-      });
-  }, []);
+      })
+      .catch((error) => console.error('Error fetching movies:', error));
+    }, [token]);
+     
+
+        if (!user) {
+          return (
+            <>
+              <LoginView onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+              }} />
+              or
+              <SignupView />
+            </>
+          );
+        }
 
   if (selectedMovie) {
     return (
@@ -43,8 +59,6 @@ export const MainView = () => {
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
-
-  <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
 
   return (
     <div>
@@ -60,4 +74,4 @@ export const MainView = () => {
       <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
     </div>
   );
-}
+};
