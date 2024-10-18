@@ -1,44 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-export const UserProfile = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import { UserInfo } from './user-info';
+import { UserUpdate } from './user-update';
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("https://my-flix-cf-fd6a3633859c.herokuapp.com/users");
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data');
+export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
+
+    const ProfileDelete = () => {
+        fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}`, 
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            
         }
-        const data = await response.json();
-        setUser(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  return (
-    <div className="user-profile">
-      <h1>{user.Name}</h1>
-      <p>Email: {user.Email}</p>
-      <p>Birthday: {user.Birthday}</p>
-      {/* Add more user information as needed */}
-    </div>
-  );
+        ).then((response) => {
+            console.log(response);
+            if (response.ok) {
+                console.log("Account deleted successfully!");
+                onLoggedOut();
+            } else {
+            alert("Failed to delete account!");
+            }
+        })
+    }
+    
+    return (
+        <Container>
+            <Row className="justify-content-center">
+                <Col>
+                    <Card>
+                        <Card.Header>
+                            <UserInfo name={user.Name} email={user.Email}/>
+                        </Card.Header>
+                    </Card>
+                </Col>
+                <Col xs={12}>
+                    <Card>
+                        <Card.Body>
+                        <UserUpdate
+                            user={user}
+                            token={token}
+                            updatedUser={updatedUser}
+                        />
+                        </Card.Body>
+                        <Card.Body>
+                         <Button 
+                            variant="danger"
+                            onClick={() => {
+                                ProfileDelete();
+                            }}>
+                                Delete account
+                            </Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
+    )
 };
-
