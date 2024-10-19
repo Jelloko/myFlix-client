@@ -42075,7 +42075,7 @@ const MovieView = ({ movies, user, token, setUser })=>{
     _s();
     const { movieId } = (0, _reactRouter.useParams)();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
-    const movie = movies.find((b)=>b.id === movieId);
+    const movie = movies.find((best)=>best.id === movieId);
     (0, _react.useEffect)(()=>{
         if (user && user.FavoriteMovies) {
             const isFavorite = user.FavoriteMovies.includes(movieId);
