@@ -6,7 +6,7 @@ import "./movie-view.scss";
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState(false);
-  const movie = movies.find((b) => b.id === movieId);
+  const movie = movies.find((best) => best.id === movieId);
 
   useEffect(() => {
     if(user && user.FavoriteMovies)  {
