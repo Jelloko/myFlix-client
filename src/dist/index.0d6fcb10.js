@@ -42949,7 +42949,7 @@ const ProfileUpdate = ({ user, updatedUser })=>{
             } else alert("Update failed!");
         }).then((data)=>{
             updatedUser(data);
-            setUsername(data.Name);
+            setName(data.Name);
             setPassword(data.Password);
             setEmail(data.Email);
             setBirthday(data.Birthday);
