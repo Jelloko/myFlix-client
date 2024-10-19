@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 
 
 
-export const UserInfo = ({ Email, Name }) => {
+export const UserInfo = ({ email, name }) => {
     return (
         <>
             <h2> Account Information</h2>
-            <p>Username: {Name}</p>
-            <p>Email: {Email}</p>
+            <p>Username: {name}</p>
+            <p>Email: {email}</p>
         </>
     );
 };
 
 UserInfo.prototype = {
-    Name: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired
 };
