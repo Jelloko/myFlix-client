@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Form, Button} from "react-bootstrap";
 
 
-export const UserUpdate = ({user, updatedUser}) => {
+export const ProfileUpdate = ({user, updatedUser}) => {
     const token = localStorage.getItem("token");
     
     const [Name, setName] = useState("");
@@ -15,7 +15,7 @@ export const UserUpdate = ({user, updatedUser}) => {
         event.preventDefault();
         
         const data = {
-            Name: Name,
+            Username: Name,
             Password: Password,
             Email: Email,
             Birthday: Birthday
@@ -105,7 +105,7 @@ export const UserUpdate = ({user, updatedUser}) => {
     )
 };  
 
-UserUpdate.propTypes = {
+ProfileUpdate.propTypes = {
     user: PropTypes.object.isRequired,
     updatedUser: PropTypes.func.isRequired 
 };
