@@ -3,8 +3,13 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 import { UserInfo } from './user-info';
 import { ProfileUpdate } from './user-update';
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { FavoriteMovies } from '../profile-view/favorite-movies';
+import { MovieCard } from '../movie-card/movie-card';
 
 export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
+
+    const FavoriteMovieList = movie.filter(m => user.FavoriteMovies.includes(m._id))
 
     const ProfileDelete = () => {
         fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}`, 
@@ -21,6 +26,7 @@ export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
             if (response.ok) {
                 console.log("Account deleted successfully!");
                 onLoggedOut();
+                NavigationBar("/login");
             } else {
             alert("Failed to delete account!");
             }
@@ -54,6 +60,9 @@ export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
                             }}>
                                 Delete account
                             </Button>
+                        </Card.Body>
+                        <Card.Body>
+                        <FavoriteMovies FavoriteMovieList={FavoriteMovieList}/>
                         </Card.Body>
                     </Card>
                 </Col>
