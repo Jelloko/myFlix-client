@@ -29,7 +29,7 @@ export const MainView = () => {
         .then((movies) => {
             const moviesApi = movies.map((movie) => {
                 return {
-                    id: movie._id,
+                    _id: movie._id,
                     Title: movie.Title,
                     Description: movie.Description,
                     ImagePath: movie.ImagePath,

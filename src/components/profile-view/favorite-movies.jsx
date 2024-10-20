@@ -12,8 +12,8 @@ export const FavoriteMovies = ({ favmov }) => {
         favmov.map((movie) => (
           <Card key={movie._id} className="mb-4">
             <Card.Body>
-              <Card.Title>{movie.title}</Card.Title>
-              <Card.Text>{movie.director.name}</Card.Text>
+              <Card.Title>{movie.Title}</Card.Title>
+              <Card.Text>{movie.Director.Name}</Card.Text>
               <Link to={`/movies/${movie._id}`}>
                 <Button variant="primary">Movie Information</Button>
               </Link>

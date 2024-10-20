@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState(false);
-  const movie = movies.find((best) => best.id === movieId);
+  const movie = movies.find((b) => b._id === movieId);
 
   useEffect(() => {
     if(user && user.FavoriteMovies)  {
@@ -30,7 +31,7 @@ const addtoFavorite = () => {
     })
     .then((data) => {
         setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("favmov", JSON.stringify(data));
         setIsFavorite(true);
     })
     .catch((e) => {
@@ -52,7 +53,7 @@ const removefromFavorite = () => {
     })
     .then((data) => {
         setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("favmov", JSON.stringify(data));
         setIsFavorite(false);
     })
     .catch((e) => {
@@ -66,7 +67,7 @@ const removefromFavorite = () => {
         <img src={movie.ImagePath} />
         </div>
       <div>
-        <span>_id: </span>
+        <span>id: </span>
         <span>{movie._id}</span>
       </div>
       <div>
