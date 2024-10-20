@@ -62,7 +62,7 @@ export const ProfileUpdate = ({user, updatedUser}) => {
                   value={Name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  minLength="5"
+                  minLength="3"
               />
             </Form.Group>  
             
@@ -96,7 +96,7 @@ export const ProfileUpdate = ({user, updatedUser}) => {
               />
             </Form.Group>
             <br></br>
-            <div className="d-grid gap-2">  
+            <div>  
                 <Button variant="primary" type="submit">
                     Edit Profile
                 </Button>
