@@ -4,13 +4,10 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { UserInfo } from './user-info';
 import { ProfileUpdate } from './user-update';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
-import { FavoriteMovies } from '../profile-view/favorite-movies';
-import { MovieCard } from '../movie-card/movie-card';
+import { FavoriteMovies } from './favorite-movies';
 
-export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
-
-    const FavoriteMovieList = movie.filter(m => user.FavoriteMovies.includes(m._id))
-
+export const ProfileView = ({ user, movies, token, updatedUser, onLoggedOut }) => {
+    const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m._id));
     const ProfileDelete = () => {
         fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}`, 
         {
@@ -61,12 +58,13 @@ export const ProfileView = ({user, token, updatedUser, onLoggedOut}) => {
                                 Delete account
                             </Button>
                         </Card.Body>
-                        <Card.Body>
-                        <FavoriteMovies FavoriteMovieList={FavoriteMovieList}/>
-                        </Card.Body>
                     </Card>
+                </Col>
+                <Col xs={12}>
+                    <h3>Your Favorite Movies</h3>
+                    <FavoriteMovies favmov={favoriteMovies} />
                 </Col>
             </Row>
         </Container>
-    )
+    );
 };
