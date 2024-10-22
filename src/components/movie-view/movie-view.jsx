@@ -7,7 +7,7 @@ import "./movie-view.scss";
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState(false);
-  const movie = movies.find((b) => b._id === movieId);
+  const movie = movies.find((movie) => movie._id === movieId);
 
   useEffect(() => {
     if(user && user.FavoriteMovies)  {
@@ -17,48 +17,51 @@ export const MovieView = ({ movies, user, token, setUser }) => {
 }, [movieId, user]);
 
 const addtoFavorite = () => {
-    fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users${user.Name}/${movieId}`,
-    {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}` 
-        }
-    }).then((response) => {
-        if (response.ok) {
+  fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}/FavoriteMovies/${movieId}`, {
+      method: "PUT",
+      headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}` 
+      }
+  })
+  .then((response) => {
+    console.log(response);
+    console.log(movieId)
+      if (response.ok) {
           return response.json();
-        }
-    })
-    .then((data) => {
-        setUser(data);
-        localStorage.setItem("favmov", JSON.stringify(data));
-        setIsFavorite(true);
-    })
-    .catch((e) => {
-        console.log(e);
-    });       
+      }
+  })
+  .then((data) => {
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+      setIsFavorite(true);
+  })
+  .catch((e) => {
+      console.log(e);
+  });
 };
+
 const removefromFavorite = () => {
-    fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}/${movieId}`,
-    {
-        method: "DELETE",
-        headers: { 
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}` 
-        }
-    }).then((response) => {
-        if (response.ok) {
+  fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}/FavoriteMovies/${movieId}`, {
+      method: "DELETE",
+      headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}` 
+      }
+  })
+  .then((response) => {
+      if (response.ok) {
           return response.json();
-        }
-    })
-    .then((data) => {
-        setUser(data);
-        localStorage.setItem("favmov", JSON.stringify(data));
-        setIsFavorite(false);
-    })
-    .catch((e) => {
-    console.log(e);
-    });       
+      }
+  })
+  .then((data) => {
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+      setIsFavorite(false);
+  })
+  .catch((e) => {
+      console.log(e);
+  });
 };
 
    return (
