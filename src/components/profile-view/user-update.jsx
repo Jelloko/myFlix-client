@@ -15,7 +15,7 @@ export const ProfileUpdate = ({user, updatedUser}) => {
         event.preventDefault();
         
         const data = {
-            Username: Name,
+            Name: Name,
             Password: Password,
             Email: Email,
             Birthday: Birthday
