@@ -60,6 +60,7 @@ const updatedUser = user => {
     localStorage.setItem('user', JSON.stringify(user));
 }
 
+
 return (
     <BrowserRouter>
     <NavigationBar user={user} onLoggedOut={onLoggedOut} />
@@ -104,6 +105,7 @@ return (
                                 ) : (
                                     <Col md={5}>
                                         <ProfileView 
+                                            movies={movies}
                                             user={user}
                                             token={token}
                                             updatedUser={updatedUser}
@@ -147,7 +149,9 @@ return (
                                         <> 
                                             {movies.map((movie) => (
                                                 <Col className="mb-4" key={movie._id} md={3}>
-                                                    <MovieCard movie={movie} />
+                                                    <MovieCard 
+                                                    movie={movie} 
+                                                     />
                                                 </Col>
                                             ))}
                                         </>
