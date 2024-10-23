@@ -15,6 +15,10 @@ Button {
   background-color: orange;
 }
 
+div {
+  margin-bottom: 5px;
+}
+
 *, :before, :after {
   box-sizing: border-box;
 }
