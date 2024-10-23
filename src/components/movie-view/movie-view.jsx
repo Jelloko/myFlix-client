@@ -70,10 +70,6 @@ const removefromFavorite = () => {
         <img src={movie.ImagePath} />
         </div>
       <div>
-        <span>id: </span>
-        <span>{movie._id}</span>
-      </div>
-      <div>
         <span>Title: </span>
         <span>{movie.Title}</span>
       </div>

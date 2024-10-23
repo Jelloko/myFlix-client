@@ -12,5 +12,9 @@ Button {
 $primary: Darkorange;
 $body-bg: Powderblue;
 
+div {
+  margin-bottom: 5px; 
+}
+
 @import '~bootstrap/scss/bootstrap.scss';
 
