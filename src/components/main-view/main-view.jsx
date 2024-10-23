@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from '../profile-view/profile-view';
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { setMovies } from "../../redux/reducers/movies";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -15,7 +17,8 @@ export const MainView = () => {
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useSelector((state) => state.movies);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     if(!token) {
