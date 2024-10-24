@@ -17,11 +17,11 @@ MyFlix is a movie database application where users can browse through a collecti
 
 ***Tech Stack***
 
- 6. Frontend: React.js, React Router
- 7. State Management: Redux, Redux Toolkit
- 8. Styling: Bootstrap, SCSS
- 9. Backend: MyFlix API
- 10. Routing: React Router DOM
+ 1. Frontend: React.js, React Router
+ 2. State Management: Redux, Redux Toolkit
+ 3. Styling: Bootstrap, SCSS
+ 4. Backend: MyFlix API
+ 5. Routing: React Router DOM
 
 ***Site Images***
 
