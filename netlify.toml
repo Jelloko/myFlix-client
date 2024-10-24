@@ -2,9 +2,3 @@
   from = "/*"
   to = "/"
   status = 200
-
-  [[plugins]]
-package = "netlify-plugin-python"
-
-[plugins.inputs]
-python-version = "3.8"
