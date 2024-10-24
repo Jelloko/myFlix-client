@@ -20,11 +20,11 @@ Site Images
 
 Home Page
 
- 
+![App Screenshot](.\Images\main-view.png")
 
 Profile Page
 
- 
+![App Screenshot](.\Images\profile-view.png") 
 
 Link to App: https://myflixfm.netlify.app/
 
