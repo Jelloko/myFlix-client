@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./movie-view.scss";
 
-export const MovieView = ({ movies, user, token, setUser }) => {
+export const MovieView = ({ user, token, setUser }) => {
+  const movies = useSelector((state) => state.movies.list);
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState(false);
   const movie = movies.find((movie) => movie._id === movieId);

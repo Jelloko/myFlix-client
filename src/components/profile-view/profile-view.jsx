@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 import { UserInfo } from './user-info';
 import { ProfileUpdate } from './user-update';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { FavoriteMovies } from './favorite-movies';
 
-export const ProfileView = ({ user, movies, token, updatedUser, onLoggedOut }) => {
+export const ProfileView = ({ user, token, updatedUser, onLoggedOut }) => {
+    const movies = useSelector((state) => state.movies.list);
     const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m._id));
     const ProfileDelete = () => {
         fetch(`https://my-flix-cf-fd6a3633859c.herokuapp.com/users/${user.Name}`, 
