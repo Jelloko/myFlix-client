@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
+import "./movie-card.scss";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie }) => {
@@ -12,7 +13,7 @@ export const MovieCard = ({ movie }) => {
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Director.Name}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button variant="link">Movie Information</Button>
+          <Button className='info-button' variant="link">Movie Information</Button>
           </Link>
       </Card.Body>
     </Card>
