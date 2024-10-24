@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { MovieCard } from "../movie-card/movie-card";
+import { useSelector, useDispatch } from "react-redux";
+import { MoviesList } from "../movies-list/movies-list";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from '../profile-view/profile-view';
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { setMovies } from "../../redux/reducers/movies";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -15,7 +17,8 @@ export const MainView = () => {
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
-  const [movies, setMovies] = useState([]);
+  const movies = useSelector((state) => state.movies.list);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     if(!token) {
@@ -36,7 +39,7 @@ export const MainView = () => {
                     Director: movie.Director
                 };
             });
-            setMovies(moviesApi);
+            dispatch(setMovies(moviesApi));
         }).catch((e) => {
             console.log(e);
         });
@@ -105,7 +108,6 @@ return (
                                 ) : (
                                     <Col md={5}>
                                         <ProfileView 
-                                            movies={movies}
                                             user={user}
                                             token={token}
                                             updatedUser={updatedUser}
@@ -127,7 +129,6 @@ return (
                                     ) : (    
                                         <Col md={8}>
                                             <MovieView 
-                                            movies={movies}
                                             user={user}
                                             token={token}
                                             setUser={setUser}  
@@ -138,27 +139,11 @@ return (
                         }
                     />
                     <Route
-                        path="/"
-                        element={
-                            <>
-                                {!user ? (
-                                    <Navigate to="/login" replace />
-                                    ) : movies.length === 0 ? (
-                                        <Col>The list is empty</Col>
-                                    ) : (
-                                        <> 
-                                            {movies.map((movie) => (
-                                                <Col className="mb-4" key={movie._id} md={3}>
-                                                    <MovieCard 
-                                                    movie={movie} 
-                                                     />
-                                                </Col>
-                                            ))}
-                                        </>
-                                    )}
-                            </>
-                        }
-                    />      
+                         path="/"
+                         element={
+                           <>{!user ? <Navigate to="/login" replace /> : <MoviesList />}</>
+                         }
+                       />
             </Routes>
         </Row>
     </BrowserRouter>
